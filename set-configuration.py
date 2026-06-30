@@ -30,8 +30,8 @@ print_configuration(configuration)
 
 # Create a new Configuration object with the desired settings
 configuration_to_set = Configuration('915T30D')
-configuration_to_set.ADDL = 0x02
-configuration_to_set.ADDH = 0x01
+configuration_to_set.ADDL = 0x0B
+configuration_to_set.ADDH = 0x00
 configuration_to_set.CHAN = 15
 configuration_to_set.OPTION.operatingFrequency = OperatingFrequency.FREQUENCY_915
 configuration_to_set.OPTION.fixedTransmission = FixedTransmission.FIXED_TRANSMISSION
