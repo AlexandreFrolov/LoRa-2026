@@ -36,10 +36,7 @@ configuration_to_set.CHAN = 15
 configuration_to_set.OPTION.operatingFrequency = OperatingFrequency.FREQUENCY_915
 configuration_to_set.OPTION.fixedTransmission = FixedTransmission.FIXED_TRANSMISSION
 configuration_to_set.OPTION.wakeUpTime = WirelessWakeUpTime.WAKE_UP_250
-# configuration_to_set.OPTION.transmissionPower = TransmissionPower('433T20D').\
 configuration_to_set.OPTION.transmissionPower = TransmissionPower('915T30D').get_transmission_power().POWER_21
-# or
-# configuration_to_set.OPTION.transmissionPower = TransmissionPower20.POWER_20
 configuration_to_set.SPED.airDataRate = AirDataRate.AIR_DATA_RATE_100_96
 configuration_to_set.SPED.uartParity = UARTParity.MODE_00_8N1
 configuration_to_set.SPED.uartBaudRate = UARTBaudRate.BPS_9600
@@ -56,69 +53,10 @@ print_configuration(confSetted)
 ##########################################################################################
 
 # Set the configuration to default values and print the updated configuration to the console
-print("------------- RESTORE ALL DEFAULT -------------")
-configuration_to_set = Configuration('915T30D')
-code, confSetted = lora.set_configuration(configuration_to_set)
-print(ResponseStatusCode.get_description(code))
-print_configuration(confSetted)
-
-
-# print_configuration(confSetted)
-# Initialization: {} Success
-# Retrieve configuration: {} Success
-# ------------- CONFIGURATION BEFORE CHANGE -------------
-# ----------------------------------------
-# HEAD : 0b11000000 192
-#
-# AddH : 0
-# AddL : 0
-# Chan : 23  ->  433
-#
-# SpeedParityBit    : 0b0  ->  8N1 (Default)
-# SpeedUARTDatte : 0b11  ->  9600bps (default)
-# SpeedAirDataRate  : 0b10  ->  2.4kbps (default)
-# OptionTrans       : 0b0  ->  Transparent transmission (default)
-# OptionPullup      : 0b1  ->  TXD, RXD, AUX are push-pulls/pull-ups (default)
-# OptionWakeup      : 0b0  ->  250ms (default)
-# OptionFEC         : 0b1  ->  Turn on Forward Error Correction Switch (Default)
-# OptionPower       : 0b0  ->  20dBm (Default)
-# ----------------------------------------
-# ------------- CONFIGURATION AFTER CHANGE -------------
-# Success
-# ----------------------------------------
-# HEAD : 0b11000000 192
-#
-# AddH : 1
-# AddL : 2
-# Chan : 23  ->  433
-#
-# SpeedParityBit    : 0b0  ->  8N1 (Default)
-# SpeedUARTDatte : 0b11  ->  9600bps (default)
-# SpeedAirDataRate  : 0b100  ->  9.6kbps
-# OptionTrans       : 0b1  ->  Fixed transmission (first three bytes can be used a
-# s high/low address and channel)
-# OptionPullup      : 0b1  ->  TXD, RXD, AUX are push-pulls/pull-ups (default)
-# OptionWakeup      : 0b0  ->  250ms (default)
-# OptionFEC         : 0b1  ->  Turn on Forward Error Correction Switch (Default)
-# OptionPower       : 0b0  ->  20dBm (Default)
-# ----------------------------------------
-# ------------- RESTORE ALL DEFAULT -------------
-# Success
-# ----------------------------------------
-# HEAD : 0b11000000 192
-#
-# AddH : 0
-# AddL : 0
-# Chan : 23  ->  433
-#
-# SpeedParityBit    : 0b0  ->  8N1 (Default)
-# SpeedUARTDatte : 0b11  ->  9600bps (default)
-# SpeedAirDataRate  : 0b10  ->  2.4kbps (default)
-# OptionTrans       : 0b0  ->  Transparent transmission (default)
-# OptionPullup      : 0b1  ->  TXD, RXD, AUX are push-pulls/pull-ups (default)
-# OptionWakeup      : 0b0  ->  250ms (default)
-# OptionFEC         : 0b1  ->  Turn on Forward Error Correction Switch (Default)
-# OptionPower       : 0b0  ->  20dBm (Default)
-# ----------------------------------------
+#print("------------- RESTORE ALL DEFAULT -------------")
+#configuration_to_set = Configuration('915T30D')
+#code, confSetted = lora.set_configuration(configuration_to_set)
+#print(ResponseStatusCode.get_description(code))
+#print_configuration(confSetted)
 
 
