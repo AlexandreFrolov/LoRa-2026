@@ -4,6 +4,10 @@ import serial
 from lora_e32_constants import FixedTransmission
 from lora_e32_operation_constant import ResponseStatusCode
 
+import RPi.GPIO as GPIO
+GPIO.setwarnings(False)
+
+
 # Initialize the LoRaE32 module
 loraSerial = serial.Serial('/dev/serial0') #, baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS)
 lora = LoRaE32('915T30D', loraSerial, aux_pin=18, m0_pin=22, m1_pin=27)
