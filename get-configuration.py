@@ -1,3 +1,4 @@
+import argparse
 from lora_e32 import LoRaE32, print_configuration
 from lora_e32_operation_constant import ResponseStatusCode
 import serial
@@ -5,25 +6,48 @@ import RPi.GPIO as GPIO
 
 GPIO.setwarnings(False)
 
-loraSerial = serial.Serial('/dev/serial0')
 
-lora = LoRaE32(
-    '915T30D',
-    loraSerial,
-    aux_pin=18,
-    m0_pin=22,
-    m1_pin=27
-)
+def parse_args():
+    parser = argparse.ArgumentParser(description="Инициализация и чтение конфигурации модуля LoRa E32")
+    parser.add_argument(
+        "--model", type=str, default="915T30D",
+        help="Тип модуля LoRa, например 915T30D (по умолчанию: 915T30D)"
+    )
+    parser.add_argument(
+        "--aux-pin", type=int, default=18,
+        help="Номер GPIO-пина AUX (по умолчанию: 18)"
+    )
+    parser.add_argument(
+        "--m0-pin", type=int, default=22,
+        help="Номер GPIO-пина M0 (по умолчанию: 22)"
+    )
+    parser.add_argument(
+        "--m1-pin", type=int, default=27,
+        help="Номер GPIO-пина M1 (по умолчанию: 27)"
+    )
+    return parser.parse_args()
 
-try:
-    code = lora.begin()
-    print(f"Initialization: {ResponseStatusCode.get_description(code)}")
 
-    code, configuration = lora.get_configuration()
+def main():
+    args = parse_args()
 
-    print(f"Retrieve configuration: {ResponseStatusCode.get_description(code)}")
+    loraSerial = serial.Serial('/dev/serial0')
+    lora = LoRaE32(
+        args.model,
+        loraSerial,
+        aux_pin=args.aux_pin,
+        m0_pin=args.m0_pin,
+        m1_pin=args.m1_pin
+    )
+    try:
+        code = lora.begin()
+        print(f"Initialization: {ResponseStatusCode.get_description(code)}")
+        code, configuration = lora.get_configuration()
+        print(f"Retrieve configuration: {ResponseStatusCode.get_description(code)}")
+        print_configuration(configuration)
+    finally:
+        GPIO.cleanup()
 
-    print_configuration(configuration)
 
-finally:
-    GPIO.cleanup()
+if __name__ == "__main__":
+    main()
