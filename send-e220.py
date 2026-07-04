@@ -10,7 +10,7 @@ GPIO.setwarnings(False)
 # Инициализация модуля LoRa E220-900T22D
 loraSerial = serial.Serial('/dev/serial0') 
 # Для E220-900T22D передаем базовую модель '900T22D'
-lora = LoRaE220('900T22D', loraSerial, aux_pin=18, m0_pin=22, m1_pin=17)
+lora = LoRaE220('900T22D', loraSerial, aux_pin=18, m0_pin=22, m1_pin=27)
 
 code = lora.begin()
 # Исправлено форматирование строки: в Python метод .format() или f-строки

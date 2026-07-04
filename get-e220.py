@@ -8,7 +8,7 @@ from lora_e220_constants import FixedTransmission, RssiEnableByte
 
 # Initialize the LoRaE220 module
 loraSerial = serial.Serial('/dev/serial0') #, baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS)
-lora = LoRaE220('900T22D', loraSerial, aux_pin=18, m0_pin=22, m1_pin=17)
+lora = LoRaE220('900T22D', loraSerial, aux_pin=18, m0_pin=22, m1_pin=27)
 code = lora.begin()
 print("Initialization: {}", ResponseStatusCode.get_description(code))
 
