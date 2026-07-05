@@ -25,17 +25,6 @@ configuration_to_set.OPTION.transmissionPower = TransmissionPower('900T22D').get
 code, confSetted = lora.set_configuration(configuration_to_set)
 print("Set configuration: {}".format(ResponseStatusCode.get_description(code)))
 
-#code, configuration = lora.get_configuration()
-#from lora_e220 import print_configuration
-#print_configuration(configuration)
-
-# Отправка фиксированного сообщения
-# Формат: send_fixed_message(ADDH, ADDL, CHAN, message)
-#message = 'Привет! Изучаем модули LoRa'
-#code = lora.send_fixed_message(0x00, 0x12, 16, message)
-#print("Send message: {}".format(ResponseStatusCode.get_description(code)))
-
-
 # Send a dictionary message (fixed)
 data = {'key1': 'value1', 'key2': 'value2'}
 code = lora.send_fixed_dict(0, 0x12, 16, data)
