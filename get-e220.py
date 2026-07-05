@@ -28,12 +28,8 @@ print("Set configuration: {}".format(ResponseStatusCode.get_description(code)))
 print("Waiting for messages...")
 while True:
     if lora.available() > 0:
-        # If the sender not set RSSI
-        # code, value = lora.receive_message()
-        # If the sender set RSSI
         code, value, rssi = lora.receive_message(rssi=True)
-        # Универсальный перевод сырого байта RSSI для E220
-        rssi_dbm = rssi - 256 if rssi > 128 else rssi
+        rssi_dbm = rssi - 256
         print(f'RSSI: {rssi_dbm} dBm (сырое значение: {rssi})')
         print(ResponseStatusCode.get_description(code))
         print(value)
