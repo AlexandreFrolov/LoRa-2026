@@ -32,7 +32,9 @@ while True:
         # code, value = lora.receive_message()
         # If the sender set RSSI
         code, value, rssi = lora.receive_message(rssi=True)
-        print('RSSI: ', rssi)
+        # Универсальный перевод сырого байта RSSI для E220
+        rssi_dbm = rssi - 256 if rssi > 128 else rssi
+        print(f'RSSI: {rssi_dbm} dBm (сырое значение: {rssi})')
         print(ResponseStatusCode.get_description(code))
         print(value)
     time.sleep(0.1)
