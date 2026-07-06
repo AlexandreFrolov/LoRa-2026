@@ -15,7 +15,8 @@ print("Initialization: {}".format(ResponseStatusCode.get_description(code)))
 configuration_to_set = Configuration('900T22D')
 configuration_to_set.ADDH = 0x00  # Старший байт адреса отправителя
 configuration_to_set.ADDL = 0x11  # Младший байт адреса отправителя
-configuration_to_set.CHAN = 16    # Рабочий канал (частота)
+#configuration_to_set.CHAN = 16    # 866,125 МГц
+configuration_to_set.CHAN = 19    # 869.125 МГц
 configuration_to_set.TRANSMISSION_MODE.enableRSSI = RssiEnableByte.RSSI_ENABLED
 configuration_to_set.TRANSMISSION_MODE.fixedTransmission = FixedTransmission.FIXED_TRANSMISSION
 
@@ -25,13 +26,14 @@ configuration_to_set.OPTION.transmissionPower = TransmissionPower('900T22D').get
 code, confSetted = lora.set_configuration(configuration_to_set)
 print("Set configuration: {}".format(ResponseStatusCode.get_description(code)))
 
-#code, configuration = lora.get_configuration()
-#from lora_e220 import print_configuration
-#print_configuration(configuration)
+code, configuration = lora.get_configuration()
+from lora_e220 import print_configuration
+print_configuration(configuration)
 
 # Отправка фиксированного сообщения
 # Формат: send_fixed_message(ADDH, ADDL, CHAN, message)
 message = 'Привет! Изучаем модули LoRa'
-code = lora.send_fixed_message(0x00, 0x12, 16, message)
+#code = lora.send_fixed_message(0x00, 0x12, 16, message)
+code = lora.send_fixed_message(0x00, 0x12, 19, message)
 
 print("Send message: {}".format(ResponseStatusCode.get_description(code)))

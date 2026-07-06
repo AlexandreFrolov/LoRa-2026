@@ -18,12 +18,18 @@ print("Initialization: {}".format(ResponseStatusCode.get_description(code)))
 configuration_to_set = Configuration('900T22D')
 configuration_to_set.ADDH = 0x00  # Address of this receiver
 configuration_to_set.ADDL = 0x12  # Address of this receiver
-configuration_to_set.CHAN = 16
+#configuration_to_set.CHAN = 16 # 866,125 МГц
+configuration_to_set.CHAN = 19 # 869.125 МГц
 configuration_to_set.TRANSMISSION_MODE.fixedTransmission = FixedTransmission.FIXED_TRANSMISSION
 # To enable RSSI, you must also enable RSSI on sender
 configuration_to_set.TRANSMISSION_MODE.enableRSSI = RssiEnableByte.RSSI_ENABLED
 code, confSetted = lora.set_configuration(configuration_to_set)
 print("Set configuration: {}".format(ResponseStatusCode.get_description(code)))
+
+code, configuration = lora.get_configuration()
+from lora_e220 import print_configuration
+print_configuration(configuration)
+
 
 print("Waiting for messages...")
 while True:
